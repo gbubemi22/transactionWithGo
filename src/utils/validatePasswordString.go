@@ -1,28 +1,34 @@
 package utils
 
-
 import (
 	"fmt"
 	"regexp"
  )
  
- // validatePasswordString validates a password string.
  func ValidatePasswordString(password string) error {
-	
-	pattern := `^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$`
- 
-	// Compile the regular expression pattern.
-	regex, err := regexp.Compile(pattern)
-	if err != nil {
-	    return err
+	// Check for at least one digit
+	hasDigit, _ := regexp.MatchString(`[0-9]`, password)
+	if !hasDigit {
+	    return fmt.Errorf("Password must contain at least one digit.")
 	}
  
-		if !regex.MatchString(password) {
-	    return fmt.Errorf("Password must contain a capital letter, number, special character, and be between 8 and 20 characters long.")
+	// Check for at least one lowercase letter
+	hasLowercase, _ := regexp.MatchString(`[a-z]`, password)
+	if !hasLowercase {
+	    return fmt.Errorf("Password must contain at least one lowercase letter.")
+	}
+ 
+	// Check for at least one uppercase letter
+	hasUppercase, _ := regexp.MatchString(`[A-Z]`, password)
+	if !hasUppercase {
+	    return fmt.Errorf("Password must contain at least one uppercase letter.")
+	}
+ 
+	// Check for length between 8 and 20 characters
+	if len(password) < 8 || len(password) > 20 {
+	    return fmt.Errorf("Password must be between 8 and 20 characters long.")
 	}
  
 	return nil
  }
- 
-
  

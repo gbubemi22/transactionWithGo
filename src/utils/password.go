@@ -16,3 +16,15 @@ func HashPassword(password string) (string, error) {
 	}
 	return string(hashedPassword), nil
  }
+
+
+ // VerifyPassword checks if the provided password matches the hashed password.
+
+
+func VerifyPassword(userPassword string, providedPassword string) (bool, string) {
+	err := bcrypt.CompareHashAndPassword([]byte(userPassword), []byte(providedPassword))
+	if err != nil {
+	    return false, "Invalid credentials for password"
+	}
+	return true, ""
+ }
