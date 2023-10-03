@@ -24,7 +24,7 @@ func NewAuthController(db *gorm.DB) *AuthController {
 }
 
 func (ac *AuthController) Signup() gin.HandlerFunc {
-    return func(c *gin.Context) {
+	return func(c *gin.Context) {
         var userData model.User
         if err := c.ShouldBindJSON(&userData); err != nil {
             c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid JSON data: " + err.Error()})

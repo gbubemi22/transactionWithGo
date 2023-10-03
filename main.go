@@ -4,6 +4,7 @@ import (
     "github.com/gin-gonic/gin"
     "github.com/joho/godotenv"
     "github.com/jinzhu/gorm"
+   
     _ "github.com/jinzhu/gorm/dialects/postgres"
     "log"
     "fmt"
@@ -11,7 +12,7 @@ import (
     "github.com/gbubemi22/transaction/src/model"
     "github.com/gbubemi22/transaction/src/routes"
     "github.com/gbubemi22/transaction/src/controller"
-    //"github.com/gbubemi22/transaction/src/utils"
+    
 )
 
 func PerformMigrations(db *gorm.DB) {
@@ -47,6 +48,7 @@ func main() {
     }
 
     defer db.Close()
+    db.AutoMigrate(&model.Wallet{})
 
     PerformMigrations(db)
 
@@ -64,9 +66,13 @@ func main() {
 
     authController := controller.NewAuthController(db) 
     userController := controller.NewUserController(db) 
+    walletController := controller.NewWalletController(db) 
+    transactionController := controller.NewTransactionController(db)
 
     routes.AuthRoutes(router,authController )
     routes.UserRoutes(router, userController)
+    routes.WalletRoutes(router, walletController)
+    routes.TransactionRoutes(router, transactionController)
 
     
 

@@ -6,8 +6,10 @@ import (
 
 type Wallet struct {
     gorm.Model
+    UserID   uint    `json:"user_id" db:"user_id" required:"true"`
     UserName string  `json:"username" db:"username" required:"true"`
     Balance  float64 `json:"balance" db:"balance" required:"true" default:"0.00"`
+    User     User    `json:"user" gorm:"foreignkey:UserID"`
 }
 
 

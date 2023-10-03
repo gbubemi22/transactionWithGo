@@ -41,6 +41,16 @@ func InitDB() (*gorm.DB, error) {
     return db, nil
 }
 
+if err := db.AutoMigrate(&model.Wallet{}).Error; err != nil {
+    return nil, err
+}
+
+return db, nil
+
+
+
+
+
 
 
 
