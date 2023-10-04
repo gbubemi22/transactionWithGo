@@ -13,7 +13,7 @@ type Wallet struct {
 }
 
 
-func (w *Wallet) CreateUser(db *gorm.DB) error {
+func (w *Wallet) CreateWallet(db *gorm.DB) error {
 	return db.Create(w).Error
  }
  

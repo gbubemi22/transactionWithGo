@@ -47,7 +47,7 @@ type WalletController struct {
 	  wallet := model.Wallet{
 		 UserID:   uint(userID),
 		 UserName: user.FirstName,
-		 // You can set other wallet properties as needed
+		 
 	  }
 
 	  // Save the wallet to the database

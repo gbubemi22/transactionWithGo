@@ -3,7 +3,7 @@ package model
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/google/uuid"
+	//"github.com/google/uuid"
  )
 
 
@@ -21,14 +21,10 @@ type Transaction struct {
 	Status        string  `json:"status" gorm:"type:varchar(255)"`
  }
  
- // GenerateUUID generates a new UUID and sets it as the reference
- func (t *Transaction) GenerateUUID() {
-	uuidValue := uuid.New()
-	t.Reference = uuidValue.String()
- }
+ 
  
  func (t *Transaction) InitTransaction(db *gorm.DB) error {
-	t.GenerateUUID() // Generate UUID before creating the transaction
+	
 	return db.Create(t).Error
  }
  
